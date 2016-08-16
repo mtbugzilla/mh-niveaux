@@ -4,7 +4,7 @@
 // @version     0.2
 // @author      Raphaël (troll 98777)
 // @namespace   https://github.com/mtbugzilla/
-// @downloadURL https://github.com/mtbugzilla/mh-niveaux/MH_Niveaux.user.js
+// @downloadURL https://github.com/mtbugzilla/mh-niveaux/raw/master/MH_Niveaux.user.js
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js
 // @grant       none
 // @include     http://games.mountyhall.com/mountyhall/MH_Play/Play_vue.php
