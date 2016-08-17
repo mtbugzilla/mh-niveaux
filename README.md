@@ -13,11 +13,35 @@ Le but de ce script est de fournir une estimation rapide des niveaux
 des monstres visibles en se basant uniquement sur leur nom et sans
 devoir faire appel à des outils ou bases de données externes.
 
+## Limitations
+
 Ce programme n'a pas la prétention d'être parfait.  Il ne pourrait pas
 l'être car le niveau de certains monstres tels que les Phoenix ou les
 Elémentaires Magmatiques ne peut pas être deviné en se basant
 uniquement sur leur nom.  Des outils externes seront donc toujours
 utiles pour partager les informations de Connaissance des Monstres.
+
+Ce programme ne tient pas compte des "anciens" monstres dont le
+numéro est inférieur à 4000000.  Il y en a de moins en moins dans le
+hall et il ne me semble pas utile d'alourdir le code en ajoutannt des
+cas particuliers pour les différences entre anciens et nouveaux monstres.
+
+## Installation
+
+Il faut d'abord avoir une extension pour "userscripts", qui dépend de votre navigateur :
+* Pour Firefox, [GreaseMonkey](https://addons.mozilla.org/fr/firefox/addon/greasemonkey/).
+* Pour Chrome, [TamperMonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=fr).
+* Pour Opera, [TamperMonkey](https://addons.opera.com/en/extensions/details/tampermonkey-beta/) ou [ViolentMonkey](https://addons.opera.com/en/extensions/details/violent-monkey/).
+
+D'autres extensions ou add-ons compatibles avec GreaseMonkey sont
+probablement disponibles pour ces navigateurs ou d'autres.  Le
+site
+[GreasyFork](https://greasyfork.org/fr/help/installing-user-scripts)
+donne quelques instructions d'installation.
+
+Une fois que l'extension appropriée sera installée et active, il
+devrait être suffisant de cliquer sur [le script MH-Niveaux](https://github.com/mtbugzilla/mh-niveaux/raw/master/MH_Niveaux.user.js)
+pour lancer l'installation automatique.
 
 ## Motivation
 
@@ -40,3 +64,18 @@ ultérieure choisie par vous).  Ce programme est distribué **sans
 aucune garantie**.  Pour plus de détails, reportez-vous au fichier
 LICENSE ou à d'autres copies de l'AGPL v3 telle que distribuée par la
 Free Software Foundation.
+
+J'ai choisi l'AGPL v3 car il me semble que cette license est celle
+qui garantit le mieux que le code restera libre. Si vous voulez
+inclure des parties de ce code dans un autre programme mais qu'il est
+totalement impossible pour vous d'utiliser l'AGPL v3 ou ultérieure,
+contactez-moi et nous pourrons trouver une solution.
+
+## Remerciements
+
+Les informations concernant le niveaux des monstres proviennent
+principalement des sources suivantes :
+* [Liste des monstres sur Mountypédia](http://mountypedia.mountyhall.com/Mountyhall/ListeMonstres) (partiellement obsolète).
+* [Bestiaire niveau des monstres](http://www.mountyhall.com/Forum/display_topic_threads.php?ForumID=17&TopicID=154621) (forum MountyHall) incluant de nombreuses corrections de la liste Mountypédia.
+* [Liste publique des monstres](http://ftp.mountyhall.com/Public_Monstres.txt) sur le serveur FTP MountyHall.
+* Vérifications par CdM pour certains monstres ou templates.
