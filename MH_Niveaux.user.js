@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        MH_Niveaux
 // @description Estimation des niveaux des monstres sur la page de vue
-// @version     0.2
+// @version     0.3
 // @author      Raphaël (troll 98777)
 // @namespace   https://github.com/mtbugzilla/
 // @downloadURL https://github.com/mtbugzilla/mh-niveaux/raw/master/MH_Niveaux.user.js
@@ -14,7 +14,15 @@
 // les termes de la Licence Publique Générale GNU Affero publiée par la Free
 // Software Foundation (version 3 ou bien toute autre version ultérieure choisie
 // par vous).  Ce programme est distribué sans aucune garantie.  Pour plus de
-// détails, reportez-vous au fichier LICENSE (ou autres copies de AGPL v3).
+// détails, reportez-vous au fichier LICENSE (ou autres copies de l'AGPL v3).
+//
+// Pour exécuter des "userscripts" tels que celu-ci, votre navigateur doit
+// avoir une extension telle que GreaseMonkey, TamperMonkey ou autres.  Pour
+// les instructions d'installation, voir le fichier README.md disponible ici :
+//   https://github.com/mtbugzilla/mh-niveaux
+
+// Debug
+console.log("MH_Niveaux - version 0.3.");
 
 // Pour utiliser une copie locale de jQuery
 this.$ = this.jQuery = jQuery.noConflict(true);
@@ -355,11 +363,18 @@ $("#VueMONSTRE thead tr th").each(function(index){
   }
 });
 
+// Debug
+console.log("MH_Niveaux - colonnes " + col_nom + " et " + col_num + ".");
+
+var monstres_vus = 0;
+var monstres_ok = 0;
+
 // Parcours du tableau pour l'estimation des niveaux des monstres
 $("#VueMONSTRE tbody tr").each(function(index){
   var nom = $(this).children().eq(col_nom).text();
   var num = $(this).children().eq(col_num).text();
   var match = nom.match(/^(.+) \[(.+)\]/);
+  monstres_vus++;
 
   if (match) {
     var nom_base = match[1];
@@ -452,6 +467,7 @@ $("#VueMONSTRE tbody tr").each(function(index){
         console.log("Famille inconnue pour le monstre '" + nom_base + "'");
       }
       if (fam >= 0) {
+        monstres_ok++;
         if (monst_match[2] >= 0) {
           var niveau = monst_match[2] + niv_template + niv_age;
           if (num < 4000000) {
@@ -469,6 +485,7 @@ $("#VueMONSTRE tbody tr").each(function(index){
         $(this).children().eq(col_nom).prepend("(??!) "); // Erreur famille ou âge
       }
     } else if (nom_base.match(/^Zombi de /) || nom_base.match(/^Nâ-Hàniym-Hééé$/)) {
+      monstres_ok++;
       $(this).children().eq(col_nom).prepend("(zz) "); // Zombies
     } else {
       console.log("Monstre inconnu : '" + nom_base + "' (" + match[1] + ")");
@@ -476,3 +493,6 @@ $("#VueMONSTRE tbody tr").each(function(index){
     }
   }
 });
+
+// Debug
+console.log("MH_Niveaux - " + monstres_ok + "/" + monstres_vus + " monstres.");
