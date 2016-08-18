@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        MH_Niveaux
 // @description Estimation des niveaux des monstres sur la page de vue
-// @version     0.3
+// @version     0.4
 // @author      Raphaël (troll 98777)
 // @namespace   https://github.com/mtbugzilla/
 // @downloadURL https://github.com/mtbugzilla/mh-niveaux/raw/master/MH_Niveaux.user.js
@@ -21,11 +21,11 @@
 // les instructions d'installation, voir le fichier README.md disponible ici :
 //   https://github.com/mtbugzilla/mh-niveaux
 
-// Debug
-console.log("MH_Niveaux - version 0.3.");
-
 // Pour utiliser une copie locale de jQuery
 this.$ = this.jQuery = jQuery.noConflict(true);
+
+// Debug
+console.log("MH_Niveaux - version 0.4 avec jQuery " + $.fn.jquery + ".");
 
 // Familles de monstres
 var FAM_ERROR  = 0;
@@ -352,8 +352,8 @@ var monstres_ages = [
 ];
 
 // Trouver dans quelles colonnes sont le nom et le numéro des monstres
-var col_nom = 3;
-var col_num = 2;
+var col_nom = -1;
+var col_num = -1;
 $("#VueMONSTRE thead tr th").each(function(index){
   var text = $(this).text();
   if (text.match(/Nom/)) {
@@ -362,9 +362,25 @@ $("#VueMONSTRE thead tr th").each(function(index){
     col_num = index;
   }
 });
+if (col_nom < 0) {
+  console.log("Colonne 'Nom' non trouvée.");
+  col_nom = 3;
+}
+if (col_num < 0) {
+  console.log("Colonne 'Num' non trouvée.");
+  col_num = 2;
+}
 
 // Debug
 console.log("MH_Niveaux - colonnes " + col_nom + " et " + col_num + ".");
+
+// Extra debug
+console.log("Test 1:", $("#VueMonstre thead").length);
+console.log("Test 2:", $("#VueMonstre thead tr").length);
+console.log("Test 3:", $("#VueMonstre thead tr th").length);
+console.log("Test 4:", $("#VueMonstre tbody").length);
+console.log("Test 5:", $("#VueMonstre tbody tr").length);
+console.log("Test 6:", $("#VueMonstre tbody tr td").length);
 
 var monstres_vus = 0;
 var monstres_ok = 0;
