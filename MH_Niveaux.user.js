@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name        MH_Niveaux
 // @description Estimation des niveaux des monstres sur la page de vue
-// @version     0.4
+// @version     0.6
 // @author      Raphaël (troll 98777)
 // @namespace   https://github.com/mtbugzilla/
 // @downloadURL https://github.com/mtbugzilla/mh-niveaux/raw/master/MH_Niveaux.user.js
 // @require     https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js
 // @grant       none
 // @include     http://games.mountyhall.com/mountyhall/MH_Play/Play_vue.php
+// @include     https://games.mountyhall.com/mountyhall/MH_Play/Play_vue.php
 // ==/UserScript==
 //
 // Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon
@@ -25,7 +26,8 @@
 this.$ = this.jQuery = jQuery.noConflict(true);
 
 // Debug
-console.log("MH_Niveaux - version 0.4 avec jQuery " + $.fn.jquery + ".");
+console.log("MH_Niveaux - version 0.6 avec jQuery " + $.fn.jquery + ".");
+var t0 = new Date();
 
 // Familles de monstres
 var FAM_ERROR  = 0;
@@ -76,9 +78,11 @@ var templates_monstres_pre2 = [
 ];
 
 var templates_monstres_post = [
-  [ "Alchimiste", 0, FAM_HUMAN ],
+  [ "Affamée", 0, FAM_INSECT ],
+  [ "Affamé", 0, FAM_INSECT ],
   [ "Agressive", 1, FAM_HUMAN ],
   [ "Agressif", 1, FAM_HUMAN ],
+  [ "Alchimiste", 0, FAM_HUMAN ],
   [ "Archaïque", -1, FAM_UNDEAD ],
   [ "Attentionnée", 2, FAM_ANIMAL ],
   [ "Attentionné", 2, FAM_ANIMAL ],
@@ -101,6 +105,8 @@ var templates_monstres_post = [
   [ "des Abysses", 3, FAM_DEMON ],
   [ "Effrayée", -1, FAM_HUMAN ],
   [ "Effrayé", -1, FAM_HUMAN ],
+  [ "Enflammée", 0, FAM_INSECT ],
+  [ "Enflammé", 0, FAM_INSECT ],
   [ "Enragée", 3, FAM_ANIMAL ],
   [ "Enragé", 3, FAM_ANIMAL ],
   [ "Esculape", 2, FAM_MONSTR ],
@@ -512,3 +518,5 @@ $("#VueMONSTRE tbody tr").each(function(index){
 
 // Debug
 console.log("MH_Niveaux - " + monstres_ok + "/" + monstres_vus + " monstres.");
+var t1 = new Date();
+console.log("MH_Niveaux - durée : " + (t1.getTime() - t0.getTime()) + "ms.");
